@@ -5,13 +5,13 @@ namespace ShapesLibrary
 {
     public class Shape  // Аналог прямоугольника
     {
-        public float[] sides;
-        public void PutSides(float[] get_sides)
+        public double[] sides;
+        public void putSides(double[] get_sides)
         {
             sides = get_sides;
         }
 
-        public float Get_Area()
+        public double getArea()
         {
             if (sides[0] == sides[1])
             {
@@ -23,16 +23,27 @@ namespace ShapesLibrary
 
     public class Triangle: Shape
     {
-        public float Get_Area()
+        new public double getArea()
         {
-
+            double[] CathAndHypo = getCathetus();
+            if (isRight(CathAndHypo))
+            {
+                return CathAndHypo[0] * CathAndHypo[1] * 0.5f;
+            }
+            double p = (sides[0] + sides[1] + sides[2]) / 2;
+            return Math.Sqrt(p * (p - sides[0]) * (p - sides[1]) * (p - sides[2]));
         }
 
-        private bool is_right()
+        private bool isRight(double[] CathAndHypo)
         {
-            float min1 = float.MaxValue;  // Наибольшее из двух минимальных катетов
-            float min2 = float.MaxValue;  // Наименьшее из двух минимальных катетов
-            float hypotenuse = 0;
+            return Math.Pow(CathAndHypo[2], 2) == Math.Pow(CathAndHypo[0], 2) + Math.Pow(CathAndHypo[1], 2);
+        }
+
+        private double[] getCathetus()
+        {
+            double min1 = float.MaxValue;  // Наибольшее из двух минимальных катетов
+            double min2 = float.MaxValue;  // Наименьшее из двух минимальных катетов
+            double hypotenuse = 0;
             for (int i = 0; i < 3; i++)
             {
                 if (sides[i] < min1)
@@ -49,7 +60,7 @@ namespace ShapesLibrary
                     hypotenuse = sides[i];
                 }
             }
-            return Math.Pow(hypotenuse, 2) == Math.Pow(min1, 2) + Math.Pow(min2, 2);
+            return [min1, min2, hypotenuse];
         }
     }
 }
