@@ -1,0 +1,1 @@
+"SELECT name, category FROM Server ORDER BY category"
