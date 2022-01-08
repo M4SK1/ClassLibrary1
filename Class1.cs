@@ -6,23 +6,29 @@ namespace ShapesLibrary
     public class Shape  // Аналог прямоугольника
     {
         public double[] sides;
-        public void putSides(double[] get_sides)
+        
+        public Shape(double[] get_sides)
         {
             sides = get_sides;
         }
 
         public double getArea()
         {
-            if (sides[0] == sides[1])
+            if (sides.Length > 2)
             {
-                return sides[0] * sides[2];
+                return -1;
             }
             return sides[0] * sides[1];
         }
     }
 
-    public class Triangle: Shape
+    public class Triangle
     {
+        public double[] sides;
+        public Triangle(double[] get_sides)
+        {
+            sides = get_sides;
+        }
         public double GetArea()
         {
             double[] CathAndHypo = getCathetus();
@@ -68,11 +74,16 @@ namespace ShapesLibrary
         }
     }
     
-    public class Circle: Shape
+    public class Circle
     {
-        public double GetArea()  // sides[0] - радиус
+        double radius;
+        public Circle(double get_radius)
         {
-            return sides[0] * Math.PI;
+            radius = get_radius;
+        }
+        public double GetArea()
+        {
+            return radius * Math.PI;
         }
     }
 }
