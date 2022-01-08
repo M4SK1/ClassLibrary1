@@ -23,7 +23,7 @@ namespace ShapesLibrary
 
     public class Triangle: Shape
     {
-        new public double getArea()
+        public double GetArea()
         {
             double[] CathAndHypo = getCathetus();
             if (isRight(CathAndHypo))
@@ -44,6 +44,7 @@ namespace ShapesLibrary
             double min1 = float.MaxValue;  // Наибольшее из двух минимальных катетов
             double min2 = float.MaxValue;  // Наименьшее из двух минимальных катетов
             double hypotenuse = 0;
+            double[] CathAndHypo = new double[3];
             for (int i = 0; i < 3; i++)
             {
                 if (sides[i] < min1)
@@ -60,7 +61,18 @@ namespace ShapesLibrary
                     hypotenuse = sides[i];
                 }
             }
-            return [min1, min2, hypotenuse];
+            CathAndHypo[0] = min1;
+            CathAndHypo[1] = min2;
+            CathAndHypo[2] = hypotenuse;
+            return CathAndHypo;
+        }
+    }
+    
+    public class Circle: Shape
+    {
+        public double GetArea()  // sides[0] - радиус
+        {
+            return sides[0] * Math.PI;
         }
     }
 }
